@@ -4,6 +4,10 @@ This project is for .NET Core 2.2 and is maintained in `Visual Studio Code`.
 
 As a result it doesnot have a typical "Visual Studio" solution file out of the box.
 
+## STATUS
+
+work in progress
+
 ## Command Line Reference
 
 All commands assume that you are in the root directory of this repository.
