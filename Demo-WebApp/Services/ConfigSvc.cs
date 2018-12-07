@@ -1,9 +1,17 @@
 using Demo_WebApp.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace Demo_WebApp.Services
 {
     public class ConfigSvc : IConfig
     {
-        public string WeatherAppID => "b6907d289e10d714a6e88b30761fae22";
+        private readonly IConfiguration _configuration;
+
+        public ConfigSvc(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public string WeatherAppID => _configuration["WeatherKey"];
     }
 }

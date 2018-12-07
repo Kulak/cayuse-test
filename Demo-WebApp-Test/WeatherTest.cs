@@ -20,7 +20,7 @@ namespace Demo_WebApp_Test
         [Fact]
         public async void ShowWeather()
         {
-            var configSvc = new ConfigSvc();
+            var configSvc = new TestConfigSvc();
             var weatherSvc = new WeatherSvc(configSvc);
             dynamic weatherResult = await weatherSvc.WeatherByZipAsync("99037");
             _output.WriteLine($"status: {weatherResult}");

@@ -22,7 +22,7 @@ namespace Demo_WebApp.Services
         public async Task<JObject> WeatherByZipAsync(string zipcode)
         {
             using (var client = new HttpClient()) {
-                var path = $"http://samples.openweathermap.org/data/2.5/weather?zip={zipcode},us&appid={_config.WeatherAppID}";
+                var path = $"http://api.openweathermap.org/data/2.5/weather?zip={zipcode},us&appid={_config.WeatherAppID}";
                 var result = client.GetAsync(path).Result;
                 if (result.StatusCode != HttpStatusCode.OK) {
                     // TODO: log details
