@@ -19,13 +19,13 @@ namespace Demo_WebApp_Test
         }
 
         [Fact]
-        public async void Test1()
+        public async void ValuesTest()
         {
             var response = _client.GetAsync("/api/values").Result;
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var body = await response.Content.ReadAsStringAsync();
             _output.WriteLine($"body: {body}");
-            Assert.Equal(body, "[\"value1\",\"value2\"]");
+            Assert.Equal("[\"value1\",\"value2\"]", body);
         }
     }
 }
