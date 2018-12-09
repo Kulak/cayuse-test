@@ -22,10 +22,11 @@ namespace Demo_WebApp_Test
         {
             var configSvc = new TestConfigSvc();
             var weatherSvc = new WeatherSvc(configSvc);
-            dynamic weatherResult = await weatherSvc.WeatherByZipAsync("99037");
-            _output.WriteLine($"status: {weatherResult}");
-            _output.WriteLine($"weather: {weatherResult.weather[0].main}");
-            Assert.Equal(1, weatherResult.weather.Count);
+            var weatherResponse = await weatherSvc.WeatherByZipAsync("99037");
+            _output.WriteLine($"status: {weatherResponse.Original}");
+            _output.WriteLine($"weather: {weatherResponse.Original.weather[0].main}");
+            Assert.Equal("-117.2", weatherResponse.Longitude);
+            Assert.Equal("47.67", weatherResponse.Latitude);
         }
     }
 }

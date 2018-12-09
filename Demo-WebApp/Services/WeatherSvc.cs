@@ -19,7 +19,7 @@ namespace Demo_WebApp.Services
             _config = config;
         }
 
-        public async Task<JObject> WeatherByZipAsync(string zipcode)
+        public async Task<WeatherResponse> WeatherByZipAsync(string zipcode)
         {
             using (var client = new HttpClient()) {
                 var path = $"http://api.openweathermap.org/data/2.5/weather?zip={zipcode},us&appid={_config.WeatherAppID}";
@@ -30,7 +30,7 @@ namespace Demo_WebApp.Services
                 }
                 var body = await result.Content.ReadAsStringAsync();
                 var weather = JObject.Parse(body);
-                return weather;
+                return new WeatherResponse(weather);
             }
         }
 
