@@ -31,6 +31,7 @@ namespace Demo_WebApp
             services.AddSingleton<IConfig, ConfigSvc>();
             services.AddSingleton<IWeather, WeatherSvc>();
             services.AddSingleton<ITimeZone, TimeZoneSvc>();
+            services.AddSingleton<IElevation, ElevationSvc>();
             services.AddLogging();
         }
 
@@ -40,10 +41,10 @@ namespace Demo_WebApp
             if (string.IsNullOrEmpty(config.WeatherAppID)) {
                 logger.LogCritical("Missing Weather App ID");
             }
-            if (string .IsNullOrEmpty(config.TimeZoneAppID)) {
+            if (string .IsNullOrEmpty(config.GoogleAppID)) {
                 logger.LogCritical("Missing TimeZone App ID");
             }
-            logger.LogInformation($"Weather: {config.WeatherAppID}, Time Zone: {config.TimeZoneAppID}");
+            logger.LogInformation($"Weather: {config.WeatherAppID}, Time Zone: {config.GoogleAppID}");
 
             if (env.IsDevelopment())
             {

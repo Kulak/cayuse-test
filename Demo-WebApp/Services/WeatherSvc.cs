@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Demo_WebApp.Interfaces;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace Demo_WebApp.Services
@@ -13,25 +14,19 @@ namespace Demo_WebApp.Services
     public class WeatherSvc : IWeather
     {
         private readonly IConfig _config;
+        private readonly ILogger _logger;
 
-        public WeatherSvc(IConfig config)
+        public WeatherSvc(IConfig config, ILogger<WeatherSvc> logger)
         {
             _config = config;
+            _logger = logger;
         }
 
         public async Task<WeatherResponse> WeatherByZipAsync(string zipcode)
         {
-            using (var client = new HttpClient()) {
-                var path = $"http://api.openweathermap.org/data/2.5/weather?zip={zipcode},us&appid={_config.WeatherAppID}";
-                var result = client.GetAsync(path).Result;
-                if (result.StatusCode != HttpStatusCode.OK) {
-                    // TODO: log details
-                    throw new DataLoadExceptionException($"Failed to load weather: {result.StatusCode}");
-                }
-                var body = await result.Content.ReadAsStringAsync();
-                var weather = JObject.Parse(body);
-                return new WeatherResponse(weather);
-            }
+            var path = $"http://api.openweathermap.org/data/2.5/weather?zip={zipcode},us&appid={_config.WeatherAppID}";
+            var response = await HttpClientUtils.GetJObjectAsync(path, _logger);
+            return new WeatherResponse(response);
         }
 
     } // end of class

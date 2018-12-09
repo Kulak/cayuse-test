@@ -12,25 +12,22 @@ namespace Demo_WebApp.Services
     /// <summary>
     /// Methods are thread safe.
     /// </summary>
-    public class TimeZoneSvc : ITimeZone
+    public class ElevationSvc : IElevation
     {
-        private static DateTime UnixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-
         private readonly IConfig _config;
         private readonly ILogger _logger;
 
-        public TimeZoneSvc(IConfig config, ILogger<TimeZoneSvc> logger)
+        public ElevationSvc(IConfig config, ILogger<ElevationSvc> logger)
         {
             _config = config;
             _logger = logger;
         }
 
-        public async Task<TimeZoneResponse> GetTimeAsync(string latitude, string longitude)
+        public async Task<ElevationResponse> GetElevationAsync(string latitude, string longitude)
         {
-            var nowSinceEpochSecs = DateTime.UtcNow.Subtract(UnixTime).TotalSeconds;
-            var path = $"https://maps.googleapis.com/maps/api/timezone/json?location={latitude},{longitude}&timestamp={nowSinceEpochSecs}&key={_config.GoogleAppID}";
+            var path = $"https://maps.googleapis.com/maps/api/elevation/json?locations={latitude},{longitude}&key={_config.GoogleAppID}";
             var response = await HttpClientUtils.GetJObjectAsync(path, _logger);
-            return new TimeZoneResponse(response);
+            return new ElevationResponse(response);
         }
 
     } // end of class

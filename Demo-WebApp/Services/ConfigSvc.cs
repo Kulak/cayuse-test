@@ -14,6 +14,6 @@ namespace Demo_WebApp.Services
 
         public string WeatherAppID => _configuration["WeatherAppID"];
 
-        public string TimeZoneAppID => _configuration["TimeZoneAppID"];
+        public string GoogleAppID => _configuration["GoogleAppID"];
     }
 }

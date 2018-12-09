@@ -7,6 +7,6 @@ namespace Demo_WebApp_Test
     {
         public string WeatherAppID => Environment.GetEnvironmentVariable("CAYUSE_WeatherAppID");
 
-        public string TimeZoneAppID => Environment.GetEnvironmentVariable("CAYUSE_TimeZoneAppID");
+        public string GoogleAppID => Environment.GetEnvironmentVariable("CAYUSE_GoogleAppID");
     }
 }

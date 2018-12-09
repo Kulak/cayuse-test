@@ -6,6 +6,6 @@ namespace Demo_WebApp.Interfaces
     public interface IConfig {
         string WeatherAppID {get;}
 
-        string TimeZoneAppID {get;}
+        string GoogleAppID {get;}
     }
 }

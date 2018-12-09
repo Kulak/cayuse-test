@@ -6,16 +6,10 @@ using Newtonsoft.Json.Linq;
 namespace Demo_WebApp.Interfaces
 {
     /// <summary>
-    /// TimeZoneResponse is a wrapper to access currently required parameters
-    /// in a statically safe manner.
+    /// TimeZoneResponse exposes only required parameters or original google response.
     /// </summary>
-    public class TimeZoneResponse {
-        [JsonIgnore]
-        public dynamic Original { get; }
-
-        public TimeZoneResponse(JObject anOriginal) {
-            this.Original = anOriginal;
-        }
+    public class TimeZoneResponse : ResponseWrapper {
+        public TimeZoneResponse(JObject anOriginal) : base(anOriginal) {}
 
         public int DstOffset {
             get {

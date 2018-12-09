@@ -6,16 +6,10 @@ using Newtonsoft.Json.Linq;
 namespace Demo_WebApp.Interfaces
 {
     /// <summary>
-    /// WeatherResponse is a wrapper to access currently required parameters
-    /// in a statically safe manner.
+    /// WeatherResponse exposes only response params required by application.
     /// </summary>
-    public class WeatherResponse {
-        [JsonIgnore]
-        public dynamic Original { get; }
-
-        public WeatherResponse(JObject anOriginal) {
-            this.Original = anOriginal;
-        }
+    public class WeatherResponse : ResponseWrapper {
+        public WeatherResponse(JObject anOriginal) : base(anOriginal) {}
 
         public string Latitude {
             get {
