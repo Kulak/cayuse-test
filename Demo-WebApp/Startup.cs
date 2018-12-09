@@ -42,9 +42,9 @@ namespace Demo_WebApp
                 logger.LogCritical("Missing Weather App ID");
             }
             if (string .IsNullOrEmpty(config.GoogleAppID)) {
-                logger.LogCritical("Missing TimeZone App ID");
+                logger.LogCritical("Missing Google App ID");
             }
-            logger.LogInformation($"Weather: {config.WeatherAppID}, Time Zone: {config.GoogleAppID}");
+            logger.LogInformation($"Weather App ID: {config.WeatherAppID}, Google App ID: {config.GoogleAppID}");
 
             if (env.IsDevelopment())
             {
