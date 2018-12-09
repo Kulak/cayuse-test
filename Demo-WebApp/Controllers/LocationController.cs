@@ -28,40 +28,42 @@ namespace Demo_WebApp.Controllers
         // example uri: /api/location/WeatherByZip?zipcode=99037
         [Route("[action]")]
         [HttpGet]
-        public async Task<object> WeatherByZip(string zipcode)
+        public async Task<WeatherResponse> WeatherByZip(string zipcode)
         {
-            try {
-                return await _weatherSvc.WeatherByZipAsync(zipcode);
-            } catch (Exception ex) {
-                _logger.LogError(ex.ToString());
-                return StatusCode(500, "Failed to get weather");
-            }
+            return await _weatherSvc.WeatherByZipAsync(zipcode);
         }
 
         [Route("[action]")]
         [HttpGet]
-        public async Task<object> TimeZoneByZip(string zipcode)
+        public async Task<TimeZoneResponse> TimeZoneByZip(string zipcode)
         {
-            try {
-                var weather = await _weatherSvc.WeatherByZipAsync(zipcode);
-                return await _timeZoneSvc.GetTimeAsync(weather.Latitude, weather.Longitude);
-            } catch (Exception ex) {
-                _logger.LogError(ex.ToString());
-                return StatusCode(500, "Failed to get time zone.");
-            }
+            var weather = await _weatherSvc.WeatherByZipAsync(zipcode);
+            return await _timeZoneSvc.GetTimeAsync(weather.Latitude, weather.Longitude);
         }
 
         [Route("[action]")]
         [HttpGet]
-        public async Task<object> ElevationByZip(string zipcode)
+        public async Task<ElevationResponse> ElevationByZip(string zipcode)
         {
-            try {
-                var weather = await _weatherSvc.WeatherByZipAsync(zipcode);
-                return await _elevationSvc.GetElevationAsync(weather.Latitude, weather.Longitude);
-            } catch (Exception ex) {
-                _logger.LogError(ex.ToString());
-                return StatusCode(500, "Failed to get elevation.");
-            }
+            var weather = await _weatherSvc.WeatherByZipAsync(zipcode);
+            return await _elevationSvc.GetElevationAsync(weather.Latitude, weather.Longitude);
+        }
+
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<LocationResponse> AllByZip(string zipcode)
+        {
+            var weather = await _weatherSvc.WeatherByZipAsync(zipcode);
+            var tzTask = _timeZoneSvc.GetTimeAsync(weather.Latitude, weather.Longitude);
+            var elevationTask = _elevationSvc.GetElevationAsync(weather.Latitude, weather.Longitude);
+            Task.WaitAll(tzTask, elevationTask);
+            var tzResponse = tzTask.Result;
+            var elevationResponse = elevationTask.Result;
+            return new LocationResponse() {
+                WeatherResponse = weather,
+                TimeZoneResponse = tzResponse,
+                ElevationResponse = elevationResponse
+            };
         }
 
     } // end of class
