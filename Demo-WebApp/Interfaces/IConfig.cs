@@ -5,5 +5,7 @@ namespace Demo_WebApp.Interfaces
     /// </summary>
     public interface IConfig {
         string WeatherAppID {get;}
+
+        string TimeZoneAppID {get;}
     }
 }

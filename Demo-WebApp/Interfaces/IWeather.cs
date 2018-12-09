@@ -1,5 +1,6 @@
 using System.Dynamic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Demo_WebApp.Interfaces
@@ -9,6 +10,7 @@ namespace Demo_WebApp.Interfaces
     /// in a statically safe manner.
     /// </summary>
     public class WeatherResponse {
+        [JsonIgnore]
         public dynamic Original { get; }
 
         public WeatherResponse(JObject anOriginal) {

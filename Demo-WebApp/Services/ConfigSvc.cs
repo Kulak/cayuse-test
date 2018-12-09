@@ -12,6 +12,8 @@ namespace Demo_WebApp.Services
             _configuration = configuration;
         }
 
-        public string WeatherAppID => _configuration["CAYUSE_WeatherAppID"];
+        public string WeatherAppID => _configuration["WeatherAppID"];
+
+        public string TimeZoneAppID => _configuration["TimeZoneAppID"];
     }
 }

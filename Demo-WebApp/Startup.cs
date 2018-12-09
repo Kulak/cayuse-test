@@ -30,6 +30,7 @@ namespace Demo_WebApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<IConfig, ConfigSvc>();
             services.AddSingleton<IWeather, WeatherSvc>();
+            services.AddSingleton<ITimeZone, TimeZoneSvc>();
             services.AddLogging();
         }
 
@@ -37,9 +38,12 @@ namespace Demo_WebApp
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger, IConfig config)
         {
             if (string.IsNullOrEmpty(config.WeatherAppID)) {
-                logger.LogCritical("Missing Weather Key");
+                logger.LogCritical("Missing Weather App ID");
             }
-            logger.LogInformation($"Weather Key: {config.WeatherAppID}");
+            if (string .IsNullOrEmpty(config.TimeZoneAppID)) {
+                logger.LogCritical("Missing TimeZone App ID");
+            }
+            logger.LogInformation($"Weather: {config.WeatherAppID}, Time Zone: {config.TimeZoneAppID}");
 
             if (env.IsDevelopment())
             {

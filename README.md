@@ -36,9 +36,10 @@ Note: The inconvenience is largely driven by public nature of the project and th
 
     dotnet run --project .\Demo-WebApp\Demo-WebApp.csproj
 
-And then go to URL:
+Test URLs:
 
-    https://localhost:5001/api/weather/byzip?zipcode=99037
+* <http://localhost:5000/api/location/weatherbyzip?zipcode=99037>
+* <http://localhost:5000/api/location/timezonebyzip?zipcode=99037>
 
 ### Run Tests
 
