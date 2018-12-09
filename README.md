@@ -41,6 +41,7 @@ Test URLs:
 * <http://localhost:5000/api/location/weatherbyzip?zipcode=99037>
 * <http://localhost:5000/api/location/timezonebyzip?zipcode=99037>
 * <http://localhost:5000/api/location/elevationbyzip?zipcode=99037>
+* <http://localhost:5000/api/location/allbyzip?zipcode=99037>
 
 ### Run Tests
 
