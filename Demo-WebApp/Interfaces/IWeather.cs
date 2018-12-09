@@ -23,6 +23,18 @@ namespace Demo_WebApp.Interfaces
             }
         }
 
+        public string City {
+            get {
+                return Original.name;
+            }
+        }
+
+        public string MainTemperature {
+            get {
+                return Original.main.temp;
+            }
+        }
+
     } // end of WeatherResponse class
 
     /// <summary>

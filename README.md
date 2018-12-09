@@ -36,6 +36,8 @@ Note: The inconvenience is largely driven by public nature of the project and th
 
     dotnet run --project .\Demo-WebApp\Demo-WebApp.csproj
 
+Main URL for the purpose of this exercise: <http://localhost:5000/api/location/descriptionbyzip/99037>
+
 Test URLs:
 
 * <http://localhost:5000/api/location/weatherbyzip?zipcode=99037>

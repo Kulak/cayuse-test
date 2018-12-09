@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Demo_WebApp.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Demo_WebApp.Controllers
 {
+    /// <summary>
+    /// LocationResponse aggregates data into one object (composite object).
+    /// </summary>
+    public class LocationResponse {
+        public WeatherResponse WeatherResponse {get;set;}
+        public TimeZoneResponse TimeZoneResponse {get;set;}
+        public ElevationResponse ElevationResponse {get;set;}
+    } // end of LocationResponse
+
     [Route("api/[controller]")]
     [ApiController]
     public class LocationController : ControllerBase
@@ -65,6 +75,20 @@ namespace Demo_WebApp.Controllers
                 ElevationResponse = elevationResponse
             };
         }
+
+        [Route("[action]/{zipcode}")]
+        [HttpGet]
+        public async Task<string> DescriptionByZip(string zipcode)
+        {
+            var all = await this.AllByZip(zipcode);
+            var text = new StringBuilder();
+            text.AppendFormat("At the location '{0}', ", all.WeatherResponse.City);
+            text.AppendFormat("the temperature is {0}, ", all.WeatherResponse.MainTemperature);
+            text.AppendFormat("the timezone is {0}, ", all.TimeZoneResponse.TimeZoneName);
+            text.AppendFormat("the elevation is {0}.", all.ElevationResponse.FirstElevationAsStr);
+            return text.ToString();
+        }
+
 
     } // end of class
 }
