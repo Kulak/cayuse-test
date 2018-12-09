@@ -19,6 +19,9 @@ namespace Demo_WebApp
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) => {
+                    config.AddEnvironmentVariables(prefix: "CAYUSE_");
+                })
                 .UseStartup<Startup>();
     }
 }

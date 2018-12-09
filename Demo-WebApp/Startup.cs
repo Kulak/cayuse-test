@@ -34,8 +34,13 @@ namespace Demo_WebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger, IConfig config)
         {
+            if (string.IsNullOrEmpty(config.WeatherAppID)) {
+                logger.LogCritical("Missing Weather Key");
+            }
+            logger.LogInformation($"Weather Key: {config.WeatherAppID}");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,5 +54,6 @@ namespace Demo_WebApp
             app.UseHttpsRedirection();
             app.UseMvc();
         }
-    }
+
+    } // end of class
 }

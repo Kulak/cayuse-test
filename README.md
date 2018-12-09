@@ -18,6 +18,20 @@ If running from directory of the target project (web service app or test project
 
     dotnet build
 
+### Run and Test Environment
+
+Application requuires configuration of service keys.  Keys can come from the following sources:
+
+* `appsettings.json` or `appsettings.{environment}.json`;
+* environment variables prefixed with `CAYUSE_`.
+
+For the list of parameters to set check `appsettings.json` file.  
+
+Make sure that if using environment variable prefix `CAYUSE_` is added to each parameter listed in `appsettings.json` file.
+
+Note: The inconvenience is largely driven by public nature of the project and the need to keep keys private.
+
+
 ### Run Web Service
 
     dotnet run --project .\Demo-WebApp\Demo-WebApp.csproj

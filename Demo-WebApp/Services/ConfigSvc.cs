@@ -12,6 +12,6 @@ namespace Demo_WebApp.Services
             _configuration = configuration;
         }
 
-        public string WeatherAppID => _configuration["WeatherKey"];
+        public string WeatherAppID => _configuration["CAYUSE_WeatherAppID"];
     }
 }
