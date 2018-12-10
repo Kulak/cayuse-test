@@ -78,15 +78,20 @@ namespace Demo_WebApp.Controllers
 
         [Route("[action]/{zipcode}")]
         [HttpGet]
-        public async Task<string> DescriptionByZip(string zipcode)
+        public async Task<IActionResult> DescriptionByZip(string zipcode)
         {
-            var all = await this.AllByZip(zipcode);
-            var text = new StringBuilder();
-            text.AppendFormat("At the location '{0}', ", all.WeatherResponse.City);
-            text.AppendFormat("the temperature is {0}, ", all.WeatherResponse.MainTemperature);
-            text.AppendFormat("the timezone is {0}, ", all.TimeZoneResponse.TimeZoneName);
-            text.AppendFormat("the elevation is {0}.", all.ElevationResponse.FirstElevationAsStr);
-            return text.ToString();
+            try {
+                var all = await this.AllByZip(zipcode);
+                var text = new StringBuilder();
+                text.AppendFormat("At the location '{0}', ", all.WeatherResponse.City);
+                text.AppendFormat("the temperature is {0}, ", all.WeatherResponse.MainTemperature);
+                text.AppendFormat("the timezone is {0}, ", all.TimeZoneResponse.TimeZoneName);
+                text.AppendFormat("the elevation is {0}.", all.ElevationResponse.FirstElevationAsStr);
+                return Ok(text.ToString());
+            } catch (DataLoadException ex) {
+                _logger.LogError(ex.ToString());
+                return BadRequest();
+            }
         }
 
 

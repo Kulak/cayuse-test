@@ -38,6 +38,14 @@ Note: The inconvenience is largely driven by public nature of the project and th
 
 Main URL for the purpose of this exercise: <http://localhost:5000/api/location/descriptionbyzip/99037>
 
+### Test Page for Web Browser
+
+URL: <https://localhost:5001/index.html>
+
+Frontend does not require compilation or any other additional effort.  The page is setup for quick test and development and it is not meant for production.
+
+### Test URLs for Postman
+
 Test URLs:
 
 * <http://localhost:5000/api/location/weatherbyzip?zipcode=99037>

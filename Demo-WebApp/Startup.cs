@@ -58,6 +58,7 @@ namespace Demo_WebApp
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseStaticFiles();
         }
 
     } // end of class

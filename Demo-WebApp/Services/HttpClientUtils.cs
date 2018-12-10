@@ -22,7 +22,7 @@ namespace Demo_WebApp.Services
                     if (logger != null) {
                         logger.LogError("HTTP Client call to path {0} failed with {1}", path, result.Content);
                     }
-                    throw new DataLoadExceptionException($"Failed REST API call: {result.StatusCode}");
+                    throw new DataLoadException($"Failed REST API call: {result.StatusCode}");
                 }
                 var body = await result.Content.ReadAsStringAsync();
                 var response  = JObject.Parse(body);
