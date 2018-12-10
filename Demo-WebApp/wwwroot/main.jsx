@@ -35,9 +35,7 @@ class App extends React.Component {
     handleZipCodeChange = (event) => {
         let newZipCode = event.target.value;
         this.setState(Object.assign(this.state, {newZipcode: newZipCode, status: "loading..."}));
-        if (newZipCode != this.state.zipcode) {
-            this.loadLocation(newZipCode);
-        }
+        this.loadLocation(newZipCode);
     }
 
     render() {
