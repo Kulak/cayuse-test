@@ -6,7 +6,7 @@ As a result it doesnot have a typical "Visual Studio" solution file out of the b
 
 ## STATUS
 
-work in progress
+done and abandoned
 
 ## Command Line Reference
 
